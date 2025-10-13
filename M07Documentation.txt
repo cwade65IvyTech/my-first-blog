@@ -1,0 +1,22 @@
+When attempting to complete the website security portion of this assignment, I ran into an issue where the logout feature would display properly,
+ but would instead lead to an error upon use.  After doing some research, I found a stackoverflow post about the same issue I was running into.
+ The post showed me how to corrrect the issue by changing the logout code in the base.html file.
+ This correction did provide me with a functional logout, but the styling of the new logout button was unfitting to the rest of the webpage.
+ To remedy this issue, I did some more research and spent some time messing with the html code until I was able to reach a point where the styling matched the rest of the site.
+
+
+
+Stackoverflow link:
+https://stackoverflow.com/questions/77928535/django-can-login-but-cant-logout-405-method-not-allowed
+
+Code changed:
+ <p id="logout" class="top-menu">Hello {{ user.username }} <small><a href="{% url 'logout' %}">(Log out)</a></small></p>
+to:
+<p id="logout" class="top-menu">Hello {{ user.username }}
+     <small>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit", style="background-color: #c25100; color: white; font-family: 'Lobster', cursive; margin-left: 1100px;">logout</button>
+        </form>
+    </small>
+</p>
